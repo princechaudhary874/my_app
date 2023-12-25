@@ -33,8 +33,9 @@ class CurrencyConverter extends StatelessWidget {
           ),
         ),
         centerTitle: true,
-        // action widgets 
-        actions: [Text('hi')],
+        // action widgets shows in right 
+        actions: [Text('🥳')],
+        // leading widgets shows in left
       ),
       body: Center(
         // Center widget to center the column on screen
@@ -85,10 +86,16 @@ class CurrencyConverter extends StatelessWidget {
               child: TextButton(
                 onPressed: () {
                   // Placeholder function for the button press action
+                  // debug, release, profile
+                  // debugPrint is used during testing and and debugging application
+                  // release is used while how our app look like during production
+                  // profile= mixture of debug and release
+
                   print(
                       'Button Clicked Successfully'); // Console log for a successful button click
                 },
                 style: ButtonStyle(
+                  elevation: MaterialStatePropertyAll(15),
                   backgroundColor: MaterialStatePropertyAll(
                       Colors.black), // Background color of the button
                   foregroundColor: MaterialStatePropertyAll(
@@ -102,7 +109,8 @@ class CurrencyConverter extends StatelessWidget {
                     ),
                   ), // Minimum size of the button
                 ),
-                child: Text('Button' // Text displayed inside the button
+                // child:Icon(Icons.money),
+                child: Text('Button x' // Text displayed inside the button
                     ),
               ),
             )
