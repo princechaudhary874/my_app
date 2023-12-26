@@ -1,15 +1,24 @@
 // Importing material design library from Flutter
 import 'package:flutter/material.dart';
 
-// CurrencyConverter is a stateless widget, meaning it does not hold any state.
-class CurrencyConverter extends StatelessWidget {
-  // Constructor with a key parameter.
+// Stateful widgets
+class CurrencyConverter extends StatefulWidget {
   const CurrencyConverter({super.key});
 
   @override
-  // Building the widget tree for the currency converter.
+  State<CurrencyConverter> createState() => _CurrencyConverterState();
+}
+
+class _CurrencyConverterState extends State<CurrencyConverter> {
+  double result = 0;
+
+  // Create a TextEditingController for handling input text
+  final TextEditingController textEditingController = TextEditingController();
+  @override
   Widget build(BuildContext context) {
-    // Defining a custom border style for input fields.
+    print('rebuilt');
+
+    // Define a custom border style for input fields.
     final border = OutlineInputBorder(
       borderSide: BorderSide(
         color: Colors.white, // Border color set to white
@@ -33,85 +42,72 @@ class CurrencyConverter extends StatelessWidget {
           ),
         ),
         centerTitle: true,
-        // action widgets shows in right 
-        actions: [Text('🥳')],
-        // leading widgets shows in left
+        actions: [Text('🥳')], // Action widgets show on the right
       ),
       body: Center(
-        // Center widget to center the column on screen
         child: Column(
-          mainAxisAlignment: MainAxisAlignment
-              .center, // Aligning children to the center of the column
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              "0", // Placeholder text for the conversion result
-              style: TextStyle(
+              'NPR ${result.toString()}', // Placeholder text for the conversion result
+              //'NPR $result' alternative way for result to string during concatenation
+              style: const TextStyle(
                 fontSize: 50, // Font size for the text
                 fontWeight: FontWeight.bold, // Bold font weight
                 color: Color.fromRGBO(255, 255, 255, 1), // Text color
               ),
             ),
             Padding(
-              padding:
-                  const EdgeInsets.all(5.0), // Padding around the TextField
+              padding: const EdgeInsets.all(5.0),
               child: TextField(
+                controller: textEditingController,
                 style: TextStyle(
                   color: Colors.white, // Text color inside the TextField
                 ),
                 decoration: InputDecoration(
-                  hintText:
-                      'Enter your currency in USD', // Placeholder text for the TextField
-                  hintStyle: TextStyle(
-                      color: Colors.white60), // Style for the hint text
-                  prefixIcon: Icon(Icons
-                      .monetization_on), // Icon displayed at the beginning of the TextField
-                  prefixIconColor: Colors.white, // Color for the prefix icon
-                  filled: true, // Background color fill for the TextField
-                  fillColor: Colors.black, // Background color set to black
-                  // Border styles for different TextField states
-                  focusedBorder:
-                      border, // Border style when the TextField is in focus
-                  enabledBorder:
-                      border, // Border style when the TextField is enabled
+                  hintText: 'Enter your currency in USD',
+                  hintStyle: TextStyle(color: Colors.white60),
+                  prefixIcon: Icon(Icons.monetization_on),
+                  prefixIconColor: Colors.white,
+                  filled: true,
+                  fillColor: Colors.black,
+                  focusedBorder: border,
+                  enabledBorder: border,
                 ),
                 keyboardType: const TextInputType.numberWithOptions(
-                  decimal: true, // Enable decimal input
-                  signed: true, // Enable signed numbers
+                  decimal: true,
+                  signed: true,
                 ),
               ),
             ),
             Padding(
-              padding:
-                  const EdgeInsets.all(5.0), // Padding around the TextButton
+              padding: const EdgeInsets.all(5.0),
               child: TextButton(
                 onPressed: () {
                   // Placeholder function for the button press action
                   // debug, release, profile
-                  // debugPrint is used during testing and and debugging application
-                  // release is used while how our app look like during production
+                  // debugPrint is used during testing and debugging application
+                  // release is used while evaluating how our app looks during production
                   // profile= mixture of debug and release
 
-                  print(
-                      'Button Clicked Successfully'); // Console log for a successful button click
+                  setState(() {
+                    result = double.parse(textEditingController.text) * 135;
+                  });
                 },
                 style: ButtonStyle(
-                  elevation: MaterialStatePropertyAll(15),
-                  backgroundColor: MaterialStatePropertyAll(
-                      Colors.black), // Background color of the button
-                  foregroundColor: MaterialStatePropertyAll(
-                      Colors.white), // Text color of the button
-                  minimumSize: MaterialStatePropertyAll(
+                  elevation: MaterialStateProperty.all(15),
+                  backgroundColor: MaterialStateProperty.all(Colors.black),
+                  foregroundColor: MaterialStateProperty.all(Colors.white),
+                  minimumSize: MaterialStateProperty.all(
                     Size(double.infinity, 50),
                   ),
-                  shape: MaterialStatePropertyAll(
+                  shape: MaterialStateProperty.all(
                     RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(20),
                     ),
-                  ), // Minimum size of the button
+                  ),
                 ),
-                // child:Icon(Icons.money),
-                child: Text('Button x' // Text displayed inside the button
-                    ),
+                child: Text('Button'), // Text displayed inside the button
               ),
             )
           ],
