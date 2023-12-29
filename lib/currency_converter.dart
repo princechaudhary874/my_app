@@ -14,6 +14,13 @@ class _CurrencyConverterState extends State<CurrencyConverter> {
 
   // Create a TextEditingController for handling input text
   final TextEditingController textEditingController = TextEditingController();
+// function to convert currency
+  void convert() {
+    setState(() {
+      result = double.parse(textEditingController.text) * 135;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     print('rebuilt');
@@ -83,17 +90,7 @@ class _CurrencyConverterState extends State<CurrencyConverter> {
             Padding(
               padding: const EdgeInsets.all(5.0),
               child: TextButton(
-                onPressed: () {
-                  // Placeholder function for the button press action
-                  // debug, release, profile
-                  // debugPrint is used during testing and debugging application
-                  // release is used while evaluating how our app looks during production
-                  // profile= mixture of debug and release
-
-                  setState(() {
-                    result = double.parse(textEditingController.text) * 135;
-                  });
-                },
+                onPressed: convert,
                 style: ButtonStyle(
                   elevation: MaterialStateProperty.all(15),
                   backgroundColor: MaterialStateProperty.all(Colors.black),
@@ -107,7 +104,7 @@ class _CurrencyConverterState extends State<CurrencyConverter> {
                     ),
                   ),
                 ),
-                child: Text('Button'), // Text displayed inside the button
+                child: Text('Convert'), // Text displayed inside the button
               ),
             )
           ],
