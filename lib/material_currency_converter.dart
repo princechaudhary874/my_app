@@ -56,7 +56,7 @@ class _CurrencyConverterState extends State<CurrencyConverter> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              'NPR ${result.toString()}', // Placeholder text for the conversion result
+              'NPR ${result != 0 ? result.toStringAsFixed(2) : result.toStringAsFixed(0)}', // Placeholder text for the conversion result
               //'NPR $result' alternative way for result to string during concatenation
               style: const TextStyle(
                 fontSize: 50, // Font size for the text
