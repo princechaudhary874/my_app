@@ -1,34 +1,47 @@
+// Import the necessary package for Flutter Cupertino
 import 'package:flutter/cupertino.dart';
 
+// Define a Flutter widget for the CupertinoCurrencyConverter
 class CupertinoCurrencyConverter extends StatefulWidget {
+  // Constructor for CupertinoCurrencyConverter
   const CupertinoCurrencyConverter({super.key});
 
+  // Override createState to create the state for the widget
   @override
   State<CupertinoCurrencyConverter> createState() => _CupertinoCurrencyConverterState();
 }
 
+// Define the state class for CupertinoCurrencyConverter
 class _CupertinoCurrencyConverterState extends State<CupertinoCurrencyConverter> {
+  // Variable to store the conversion result
   double result = 0;
 
   // Create a TextEditingController for handling input text
   final TextEditingController textEditingController = TextEditingController();
-// function to convert currency
+
+  // Function to convert currency
   void convert() {
-    setState(() {
-      result = double.parse(textEditingController.text) * 135;
-    });
+    // Check if the input is a valid number
+    if (double.tryParse(textEditingController.text) != null) {
+      setState(() {
+        result = double.parse(textEditingController.text) * 135;
+      });
+    } else {
+      // Handle the case where the input is not a valid number
+      // You may show a snackbar or dialog to inform the user.
+    }
   }
 
+  // Build method to create the UI for the widget
   @override
   Widget build(BuildContext context) {
-    print('rebuilt');
+    print('rebuilt');  // Debugging print statement
 
-    // Define a custom border style for input fields.
-    
     // Scaffold provides the structure for the screen.
     return CupertinoPageScaffold(
       backgroundColor: Color.fromARGB(
-          255, 85, 14, 228), // Background color of the entire screen
+        255, 85, 14, 228
+      ), // Background color of the entire screen
       navigationBar: CupertinoNavigationBar(
         backgroundColor: CupertinoColors.black, // App bar background color
         middle: const Text(
@@ -37,16 +50,15 @@ class _CupertinoCurrencyConverterState extends State<CupertinoCurrencyConverter>
             color: Color.fromRGBO(0, 255, 255, 1), // Title text color
           ),
         ),
-
         // Action widgets show on the right
       ),
       child: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            // Add some padding or spacing between elements for better visual aesthetics
             Text(
               'NPR ${result != 0 ? result.toStringAsFixed(2) : result.toStringAsFixed(0)}', // Placeholder text for the conversion result
-              //'NPR $result' alternative way for result to string during concatenation
               style: const TextStyle(
                 fontSize: 50, // Font size for the text
                 fontWeight: FontWeight.bold, // Bold font weight
@@ -58,8 +70,7 @@ class _CupertinoCurrencyConverterState extends State<CupertinoCurrencyConverter>
               child: CupertinoTextField(
                 controller: textEditingController,
                 style: TextStyle(
-                  color:
-                      CupertinoColors.white, // Text color inside the TextField
+                  color: CupertinoColors.white, // Text color inside the TextField
                 ),
                 decoration: BoxDecoration(
                   color: CupertinoColors.black,
@@ -79,7 +90,6 @@ class _CupertinoCurrencyConverterState extends State<CupertinoCurrencyConverter>
               child: CupertinoButton(
                 onPressed: convert,
                 color: CupertinoColors.black,
-
                 child: Text('Convert'), // Text displayed inside the button
               ),
             )
