@@ -21,6 +21,18 @@ class _CurrencyConverterState extends State<CurrencyConverter> {
     });
   }
 
+  // @override
+  // void initState() {
+  //   initialized before widgets build
+  //   super.initState();
+  // }
+
+  @override
+  void dispose() {
+    textEditingController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     print('rebuilt');
